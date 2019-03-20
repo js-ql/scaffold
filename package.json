@@ -2,7 +2,7 @@
   "name": "scaffoldql",
   "version": "0.0.1",
   "description": "A library that is used to generate object blueprints. Inspired by graphql",
-  "main": "index.js",
+  "main": "dist/scaffold.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx webpack"
