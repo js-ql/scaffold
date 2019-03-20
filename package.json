@@ -2,9 +2,10 @@
   "name": "scaffoldql",
   "version": "0.0.1",
   "description": "A library that is used to generate object blueprints. Inspired by graphql",
-  "main": "index.js",
+  "main": "dist/scaffold.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx webpack"
   },
   "repository": {
     "type": "git",
@@ -24,5 +25,9 @@
   "bugs": {
     "url": "https://github.com/lloydaf/scaffoldql/issues"
   },
-  "homepage": "https://github.com/lloydaf/scaffoldql#readme"
+  "homepage": "https://github.com/lloydaf/scaffoldql#readme",
+  "devDependencies": {
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
+  }
 }
