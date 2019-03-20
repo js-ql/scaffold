@@ -5,8 +5,8 @@ const {isValidQl} = require('./src/validator')
 /**
  * 
  * @param {string} qlString - The schema string containing the blueprint of the object to be scaffolded
- * @description - This is a function that returns an object blueprint corresponding to the schema passed as the argument
- * @returns - An object with non-object properties having a null value
+ * @description - This is a function that returns a promise containing an object blueprint corresponding to the schema passed as the argument
+ * @returns - A promise that resolves to an object with non-object properties having a null value
  */
 const scaffold = (qlString) => {
   return new Promise((resolve, reject) => {
