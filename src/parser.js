@@ -1,29 +1,37 @@
-const {isValidQl} = require('./validator')
-
-const tokenize = (qlString) => {
-  if(!isValidQl(qlString)) throw new Error('Invalid QL string')
-  let key = ''
-  let stack = []
-  for (let i = 0; i < qlString.length; ++i) {
-    const char = qlString[i]
-    if(!isBreakPoint(char)){
-      key+=char
-    } else {
-      if(key) stack = [...stack, key]
-      key = ''
-      if(char == '{' || char == '}') stack = [...stack, char]
+const parse = (tokenizedArr) => {
+  let obj = {}
+  let lastElem = null
+  for (let i = 0; i < tokenizedArr.length; ++i) {
+    const elem = tokenizedArr[i]
+    if (elem === '{') {
+      const closingLastIndex = findClosingParentheses(i, tokenizedArr)
+      const object = parse(tokenizedArr.splice(i+1, closingLastIndex-i))
+      if(lastElem)
+        obj[lastElem] = object
+      else obj = object
+    }
+    else if (elem === '}') {
+      lastElem = null
+      continue
+    }
+    else {
+      obj[elem] = null
+      lastElem = elem
     }
   }
-  return stack;
-}
-
-function isBreakPoint (char) {
-  return ((((char === '{' || char === '}') || char === ' ') || char === '\n') || char === '')
+  return obj
 }
 
 
-console.log(tokenize(`{container{ name{
-  girlfriend
-  baby
-} }
-                  }`))
+function findClosingParentheses(currentIndex, tokenizedArr){
+  let value = 0
+  for(let i = currentIndex+1; i < tokenizedArr.length; ++i){
+    if(tokenizedArr[i]=='{') ++value
+    if(tokenizedArr[i]=='}') --value
+    if(value === -1) {
+      return i
+    }
+  }
+}
+
+exports.parse = parse
