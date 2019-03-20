@@ -1,0 +1,28 @@
+{
+  "name": "scaffoldql",
+  "version": "0.0.1",
+  "description": "A library that is used to generate object blueprints. Inspired by graphql",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lloydaf/scaffoldql.git"
+  },
+  "keywords": [
+    "scaffold",
+    "library",
+    "generator",
+    "javascript",
+    "blueprint",
+    "scaffoldql",
+    "graphql"
+  ],
+  "author": "lloydaf",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lloydaf/scaffoldql/issues"
+  },
+  "homepage": "https://github.com/lloydaf/scaffoldql#readme"
+}
