@@ -30,16 +30,16 @@ Scaffold(
 `
 ).then(obj => console.log(obj));
 
-/**
- *{
-    parent: {
-      child: {
-        grandchild: null
-      },
-      anotherChild: null
+/*
+{
+  parent: {
+    child: {
+      grandchild: null
     },
-    anotherParent: null
-  } 
+    anotherChild: null
+  },
+  anotherParent: null
+} 
  */
 
 
