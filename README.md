@@ -19,8 +19,8 @@ const {Scaffold} = require('scaffoldql');
 Scaffold(
 `
 {
-  parent{
-    child{
+  parent {
+    child {
       grandchild
     }
     anotherChild
