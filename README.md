@@ -14,7 +14,7 @@ npm install --save scaffoldql
 ## Usage:
 
 ```javascript
-const {Scaffold} = require('scaffoldql');
+const { Scaffold } = require('scaffoldql');
 
 Scaffold(
 `
