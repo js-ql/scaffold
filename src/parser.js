@@ -1,3 +1,5 @@
+const { getDefaultValue } = require('./typer')
+
 const parse = (tokenizedArr) => {
   let obj = {}
   let lastElem = null
@@ -5,8 +7,8 @@ const parse = (tokenizedArr) => {
     const elem = tokenizedArr[i]
     if (elem === '{') {
       const closingLastIndex = findClosingParentheses(i, tokenizedArr)
-      const object = parse(tokenizedArr.splice(i+1, closingLastIndex-i))
-      if(lastElem)
+      const object = parse(tokenizedArr.splice(i + 1, closingLastIndex - i))
+      if (lastElem)
         obj[lastElem] = object
       else obj = object
     }
@@ -15,20 +17,21 @@ const parse = (tokenizedArr) => {
       continue
     }
     else {
-      obj[elem] = null
-      lastElem = elem
+      const [key, value] = getDefaultValue(elem)
+      obj[key] = value
+      lastElem = key
     }
   }
   return obj
 }
 
 
-function findClosingParentheses(currentIndex, tokenizedArr){
+function findClosingParentheses(currentIndex, tokenizedArr) {
   let value = 0
-  for(let i = currentIndex+1; i < tokenizedArr.length; ++i){
-    if(tokenizedArr[i]=='{') ++value
-    if(tokenizedArr[i]=='}') --value
-    if(value === -1) {
+  for (let i = currentIndex + 1; i < tokenizedArr.length; ++i) {
+    if (tokenizedArr[i] == '{')++value
+    if (tokenizedArr[i] == '}')--value
+    if (value === -1) {
       return i
     }
   }
