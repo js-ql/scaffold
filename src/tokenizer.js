@@ -3,7 +3,7 @@ const tokenize = (qlString) => {
   let stack = []
   for (let i = 0; i < qlString.length; ++i) {
     const char = qlString[i]
-    if (!isBreakPoint(char)) {
+    if (!(isBreakPoint(char) && qlString[i - 1] !== ':')) {
       key += char
     } else {
       if (key) stack = [...stack, key]
