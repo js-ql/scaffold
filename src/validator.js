@@ -1,3 +1,4 @@
+// This function determines if the query string is valid.
 const isValidQl = (qlString) => {
   let k = 0
   for (let i = 0; i < qlString.length; i++) {

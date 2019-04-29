@@ -5,6 +5,8 @@ function getDefaultValue(key) {
   return [key.slice(0, column), defaultValueForType(key.slice(column + 1).trim())]
 }
 
+
+// This function will return the default value for the type provided for the property
 function defaultValueForType(type) {
   switch (type) {
     case "String": return ""
