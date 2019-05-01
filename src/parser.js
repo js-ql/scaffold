@@ -1,16 +1,24 @@
 const { getDefaultValue } = require('./typer')
 
+
 // This is a function that parses the tokenized query string and returns a scaffolded object.
-const parse = (tokenizedArr) => {
+const parse = (tokenizedArr, typeMap = {}) => {
   let obj = {}
   let lastElem = null
   for (let i = 0; i < tokenizedArr.length; ++i) {
     const elem = tokenizedArr[i]
-    if (elem === '{') {
+    if (elem === 'define') {
+      typeMap[tokenizedArr[i + 1]] = tokenizedArr[i + 1]
+      continue
+    }
+    else if (elem === '{') {
       const closingLastIndex = findClosingFlowerBracket(i, tokenizedArr)
-      const object = parse(tokenizedArr.splice(i + 1, closingLastIndex - i))
-      if (lastElem)
-        obj[lastElem] = object
+      let object
+      [object, typeMap] = parse(tokenizedArr.splice(i + 1, closingLastIndex - i), typeMap)
+      if (lastElem) {
+        if (!obj[lastElem])
+          obj[lastElem] = object
+      }
       else obj = object
     }
     else if (elem === '}') {
@@ -23,7 +31,7 @@ const parse = (tokenizedArr) => {
       lastElem = key
     }
   }
-  return obj
+  return [obj, typeMap]
 }
 
 // This function finds the location of the closing flower bracket for an opened flower bracket.
