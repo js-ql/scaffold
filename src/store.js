@@ -1,3 +1,6 @@
+/**
+ * The Store for the library, keeps track of schemas and generates scaffolded objects based on the schema name
+ */
 const Store = {
 
   registry: {},
