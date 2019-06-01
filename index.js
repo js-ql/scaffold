@@ -1,18 +1,51 @@
-const {parse} = require('./src/parser')
-const {tokenize} = require('./src/tokenizer')
-const {isValidQl} = require('./src/validator')
+const { parse } = require('./src/parser')
+const { tokenize } = require('./src/tokenizer')
+const { isValidQl } = require('./src/validator')
+const { Store } = require('./src/store')
 
 /**
- * 
- * @param {string} qlString - The schema string containing the blueprint of the object to be scaffolded
- * @description - This is a function that returns a promise containing an object blueprint corresponding to the schema passed as the argument
- * @returns - A promise that resolves to an object with non-object properties having a null value
+ * Function that initializes the registry
+ * @returns {Object} The registry object
  */
-const scaffold = (qlString) => {
-  return new Promise((resolve, reject) => {
-    if(!isValidQl(qlString)) reject('Invalid QL String')
-    resolve(parse(tokenize(qlString)))
-  })
-}
+const init = () => ({
+  /**
+   * @type {Object} The list of schemas
+   */
+  schemaPool: Store,
 
-exports.Scaffold = scaffold
+  /**
+   * Returns a scaffolded object based on the schema name from the registry
+   * @param {string} schemaName The name of the schema to scaffold
+   * @returns {Object} The scaffolded object
+   */
+  scaffoldSchema: function (schemaName) {
+    return this.schemaPool.getSchema(schemaName)
+  },
+
+  /**
+   * Returns a scaffolded object based on the query string
+   * @param {string} qlString The query string to scaffold
+   * @returns {Object} The scaffolded object
+   */
+  scaffold: function (qlString) {
+    if (!isValidQl(qlString)) throw new Error('Invalid QL String')
+    const [parsed] = parse(tokenize(qlString))
+    return parsed
+  },
+
+  /**
+   * Used to register schemas in the registry
+   * @param {qlString} qlString 
+   */
+  registerSchema: function (qlString) {
+    if (!isValidQl(qlString)) throw new Error('Invalid QL String')
+    const tokenizedArr = tokenize(qlString)
+    const [parsed, typeMap] = parse(tokenizedArr)
+    const schema = Object.keys(typeMap).reduce((a, key) => ({ ...a, [key]: parsed[key] }), {})
+    this.schemaPool.register(schema)
+  }
+
+})
+
+
+exports.init = init
