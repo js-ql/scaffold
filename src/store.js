@@ -1,17 +1,18 @@
-const Store = () => ({
+const Store = {
 
   registry: {},
 
-  register(schemas) {
-    Object.keys(schemas).forEach(key => {
-      if (!this.registry[key]) this.registry[key] = schemas[key]
-    })
+  register: function(schemas) {
+    const schemaNames = Object.keys(schemas)
+    for(let schemaName of schemaNames){
+      if(!this.registry[schemaName]) this.registry[schemaName] = schemas[schemaName]
+    }
   },
 
-  getSchema(schemaName) {
+  getSchema: function(schemaName) {
     return this.registry[schemaName]
   }
-})
+}
 
 
 exports.Store = Store
