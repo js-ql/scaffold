@@ -13,11 +13,12 @@ npm install --save scaffoldql
 
 ## Usage:
 
-```javascript
-const { Scaffold } = require('scaffoldql');
+### Simple Usage:
 
-Scaffold(
-`
+```javascript
+const { init } = require('scaffoldql')
+
+const queryString = `
 {
   parent {
     child {
@@ -26,9 +27,11 @@ Scaffold(
     anotherChild
   }
   anotherParent
-}
-`
-).then(obj => console.log(obj));
+}`
+
+const store = init()
+
+console.log(store.scaffold(queryString))
 
 /*
 {
@@ -41,6 +44,62 @@ Scaffold(
   anotherParent: null
 } 
  */
+
+
+
+```
+
+### With Types:
+```javascript
+const { init } = require('scaffoldql')
+
+const queryString = `
+{
+  name: String
+  friends: Array
+  sex: String
+}
+`
+
+const store = init()
+
+console.log(store.scaffold(queryString))
+/*
+{
+  name: '',
+  friends: [],
+  sex: ''
+}
+*/
+
+```
+
+### By Defining Schemas
+
+```javascript
+const { init } = require('scaffoldql')
+
+const queryString = `
+define Person {
+  name: String
+  friends: Array
+  sex: String
+}
+`
+
+const store = init()
+
+store.registerSchema(queryString)
+
+console.log(store.scaffoldSchema('Person'))
+
+/*
+{
+  name: '',
+  friends: [],
+  sex: ''
+}
+*/
 
 
 ```
