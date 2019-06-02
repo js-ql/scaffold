@@ -1,3 +1,4 @@
+[![npm version](https://badge.fury.io/js/scaffoldql.svg)](https://badge.fury.io/js/scaffoldql)
 # ScaffoldQL
 
 ScaffoldQL is a JavaScript library that is used to generate objects using scaffolds.
