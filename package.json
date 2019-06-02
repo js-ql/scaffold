@@ -1,6 +1,6 @@
 {
   "name": "scaffoldql",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "A library that is used to generate object blueprints. Inspired by graphql",
   "main": "dist/scaffold.js",
   "scripts": {
