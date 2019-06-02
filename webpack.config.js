@@ -5,6 +5,7 @@ module.exports = {
   entry: {
     app: ["./index.js"]
   },
+  mode: 'production',
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "scaffold.js",
