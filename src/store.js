@@ -1,7 +1,7 @@
 /**
  * The Store for the library, keeps track of schemas and generates scaffolded objects based on the schema name
  */
-const Store = {
+export const Store = {
 
   registry: {},
 
@@ -16,6 +16,3 @@ const Store = {
     return this.registry[schemaName]
   }
 }
-
-
-exports.Store = Store

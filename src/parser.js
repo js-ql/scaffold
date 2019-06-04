@@ -2,7 +2,7 @@ const { getDefaultValue } = require('./typer')
 
 
 // This is a function that parses the tokenized query string and returns a scaffolded object.
-const parse = (tokenizedArr, typeMap = {}) => {
+export const parse = (tokenizedArr, typeMap = {}) => {
   let obj = {}
   let lastElem = null
   for (let i = 0; i < tokenizedArr.length; ++i) {
@@ -45,5 +45,3 @@ function findClosingFlowerBracket(currentIndex, tokenizedArr) {
     }
   }
 }
-
-exports.parse = parse

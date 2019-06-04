@@ -1,5 +1,5 @@
 // This is a function that is used to tokenize the query string
-const tokenize = (qlString) => {
+export const tokenize = (qlString) => {
   let key = ''
   let stack = []
   for (let i = 0; i < qlString.length; ++i) {
@@ -20,5 +20,3 @@ const tokenize = (qlString) => {
 function isBreakPoint(char) {
   return ((((char === '{' || char === '}') || char === ' ') || char === '\n') || char === '')
 }
-
-exports.tokenize = tokenize
