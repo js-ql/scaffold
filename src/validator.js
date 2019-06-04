@@ -3,7 +3,7 @@
  * @param {string} qlString The Query String to check validity for
  * @returns {boolean} True or False, depending on the validity of the query string
  */
-const isValidQl = (qlString) => {
+export const isValidQl = (qlString) => {
   let k = 0
   for (let i = 0; i < qlString.length; i++) {
     if (qlString[i] === '{')
@@ -15,5 +15,3 @@ const isValidQl = (qlString) => {
   }
   return k === 0
 }
-
-exports.isValidQl = isValidQl

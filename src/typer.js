@@ -1,5 +1,5 @@
 // This function will return the key and it's default value depending on the type
-function getDefaultValue(key) {
+export function getDefaultValue(key) {
   const column = key.indexOf(":")
   if (column < 0) return [key, null]
   return [key.slice(0, column), defaultValueForType(key.slice(column + 1).trim())]
@@ -15,5 +15,3 @@ function defaultValueForType(type) {
     default: return null
   }
 }
-
-exports.getDefaultValue = getDefaultValue
