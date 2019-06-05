@@ -1,4 +1,8 @@
-// This is a function that is used to tokenize the query string
+/**
+ * This is a function that is used to tokenize the query string
+ * @param {string} qlString The query string to tokenize
+ * 
+ */
 export const tokenize = (qlString) => {
   let key = ''
   let stack = []
@@ -16,7 +20,10 @@ export const tokenize = (qlString) => {
 }
 
 
-// This function returns true if the character being parsed is a breakpoint character
+/**
+ * This function returns true if the character being parsed is a breakpoint character
+ * @param {string} char 
+ */
 function isBreakPoint(char) {
   return ((((char === '{' || char === '}') || char === ' ') || char === '\n') || char === '')
 }
