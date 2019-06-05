@@ -1,4 +1,4 @@
-# <img alt="Logo" src="assets/jsql.svg">Scaffold
+# <img src="assets/jsql.svg" alt="JSQL Logo" width="100" height="100" align="center">Scaffold
 
 [![npm version](https://badge.fury.io/js/%40js-ql%2Fscaffold.svg)](https://badge.fury.io/js/%40js-ql%2Fscaffold)
 
