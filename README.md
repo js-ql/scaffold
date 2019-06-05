@@ -1,4 +1,4 @@
-# <div style="display:flex; flex-direction:row; align-items:center; justify-content: flex-start"><img src="assets/logo.png" alt="JSQL Logo" width="15%" height="15%">Scaffold</div>
+# <img alt="Logo" src="assets/jsql.svg">Scaffold
 
 [![npm version](https://badge.fury.io/js/%40js-ql%2Fscaffold.svg)](https://badge.fury.io/js/%40js-ql%2Fscaffold)
 
