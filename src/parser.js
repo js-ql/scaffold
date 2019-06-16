@@ -1,4 +1,5 @@
 const { getDefaultValue } = require('./typer')
+const { CLOSING_CURLY, DEFINE, OPENING_CURLY } = require('./constants')
 
 /**
  * This is a function that parses the tokenized query string and returns a scaffolded object.
@@ -10,30 +11,27 @@ export const parse = (tokenizedArr, typeMap = {}, globalMap = {}) => {
   let lastElem = null
   for (let i = 0; i < tokenizedArr.length; ++i) {
     const elem = tokenizedArr[i]
-    if (elem === 'define') {
-      typeMap[tokenizedArr[i + 1]] = tokenizedArr[i + 1]
-      continue
-    }
-    else if (elem === '{') {
-      const closingLastIndex = findClosingFlowerBracket(i, tokenizedArr)
-      let object
-      [object, typeMap] = parse(tokenizedArr.splice(i + 1, closingLastIndex - i), typeMap, globalMap)
-      if (lastElem) {
-        if (!obj[lastElem]) {
-          obj[lastElem] = object
-          globalMap[lastElem] = object
-        }
+    switch (elem) {
+      case DEFINE: {
+        typeMap[tokenizedArr[i + 1]] = tokenizedArr[i + 1]
+        continue
       }
-      else obj = object
-    }
-    else if (elem === '}') {
-      lastElem = null
-      continue
-    }
-    else {
-      const [key, value] = getDefaultValue(elem, globalMap)
-      obj[key] = value
-      lastElem = key
+      case OPENING_CURLY: {
+        const closingLastIndex = findClosingFlowerBracket(i, tokenizedArr)
+        let object
+        [object, typeMap] = parse(tokenizedArr.splice(i + 1, closingLastIndex - i), typeMap, globalMap)
+        lastElem ? (!obj[lastElem]) ? (obj[lastElem] = object, globalMap[lastElem] = object) : null : obj = object
+        break
+      }
+      case CLOSING_CURLY: {
+        lastElem = null
+        continue
+      }
+      default: {
+        const [key, value] = getDefaultValue(elem, globalMap)
+        obj[key] = value
+        lastElem = key
+      }
     }
   }
   return [obj, typeMap]
@@ -47,8 +45,8 @@ export const parse = (tokenizedArr, typeMap = {}, globalMap = {}) => {
 function findClosingFlowerBracket(currentIndex, tokenizedArr) {
   let value = 0
   for (let i = currentIndex + 1; i < tokenizedArr.length; ++i) {
-    if (tokenizedArr[i] == '{')++value
-    if (tokenizedArr[i] == '}')--value
+    if (tokenizedArr[i] === OPENING_CURLY)++value
+    if (tokenizedArr[i] === CLOSING_CURLY)--value
     if (value === -1) {
       return i
     }

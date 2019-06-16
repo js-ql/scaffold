@@ -1,19 +1,20 @@
+const { OPENING_CURLY, CLOSING_CURLY, SPACE, EMPTY_STRING, COLON } = require('./constants')
 /**
  * This is a function that is used to tokenize the query string
  * @param {string} qlString The query string to tokenize
  * 
  */
 export const tokenize = (qlString) => {
-  let key = ''
+  let key = EMPTY_STRING
   let stack = []
   for (let i = 0; i < qlString.length; ++i) {
     const char = qlString[i]
-    if (!(isBreakPoint(char) && qlString[i - 1] !== ':')) {
+    if (!(isBreakPoint(char) && qlString[i - 1] !== COLON)) {
       key += char
     } else {
       if (key) stack = [...stack, key]
-      key = ''
-      if (char == '{' || char == '}') stack = [...stack, char]
+      key = EMPTY_STRING
+      if (char === OPENING_CURLY || char === CLOSING_CURLY) stack = [...stack, char]
     }
   }
   return stack
@@ -25,5 +26,5 @@ export const tokenize = (qlString) => {
  * @param {string} char 
  */
 function isBreakPoint(char) {
-  return ((((char === '{' || char === '}') || char === ' ') || char === '\n') || char === '')
+  return ((((char === OPENING_CURLY || char === CLOSING_CURLY) || char === SPACE) || char === '\n') || char === EMPTY_STRING)
 }
