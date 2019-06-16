@@ -1,4 +1,4 @@
-const { EMPTY_STRING, EMPTY_ARRAY, EMPTY_OBJECT, COLON } = require('./constants')
+const { EMPTY_STRING, EMPTY_ARRAY, EMPTY_OBJECT, COLON, STRING, ARRAY, OBJECT } = require('./constants')
 /**
  * This function will return the key and it's default value depending on the type
  * @param {string} key 
@@ -16,9 +16,9 @@ export function getDefaultValue(key, types = null) {
 function defaultValueForType(type, types = null) {
   if (types && types[type]) return types[type]
   switch (type) {
-    case 'String': return EMPTY_STRING
-    case 'Array': return EMPTY_ARRAY
-    case 'Object': return EMPTY_OBJECT
+    case STRING: return EMPTY_STRING
+    case ARRAY: return EMPTY_ARRAY
+    case OBJECT: return EMPTY_OBJECT
     default: return null
   }
 }
