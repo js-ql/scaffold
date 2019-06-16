@@ -4,29 +4,23 @@
 
 Scaffold is a JavaScript library that is used to generate objects using templates inspired from GraphQL.
 
+## Installation
 
-## Installation:
-
-```
+```console
 npm install --save @js-ql/scaffold
 ```
 
-## Usage:
+## Usage
 
-### Simple Usage:
+### Simple Usage
 
 ```javascript
 const { init } = require('@js-ql/scaffold')
 
 const queryString = `
 {
-  parent {
-    child {
-      grandchild
-    }
-    anotherChild
-  }
-  anotherParent
+  name
+  age
 }`
 
 const store = init()
@@ -35,21 +29,17 @@ console.log(store.scaffold(queryString))
 
 /*
 {
-  parent: {
-    child: {
-      grandchild: null
-    },
-    anotherChild: null
-  },
-  anotherParent: null
-} 
+  name: null,
+  age: null
+}
  */
 
 
 
 ```
 
-### With Types:
+### With Types
+
 ```javascript
 const { init } = require('@js-ql/scaffold')
 
@@ -57,7 +47,6 @@ const queryString = `
 {
   name: String
   friends: Array
-  sex: String
 }
 `
 
@@ -68,7 +57,6 @@ console.log(store.scaffold(queryString))
 {
   name: '',
   friends: [],
-  sex: ''
 }
 */
 
@@ -83,7 +71,6 @@ const queryString = `
 define Person {
   name: String
   friends: Array
-  sex: String
 }
 `
 
@@ -97,9 +84,46 @@ console.log(store.scaffoldSchema('Person'))
 {
   name: '',
   friends: [],
-  sex: ''
 }
 */
 
+```
+
+### Multiple Schemas
+
+```javascript
+const { init } = require('@js-ql/scaffold')
+
+const queryString = `
+define Friend {
+  name
+  age
+}
+define Person {
+  name: String
+  friends: Array
+  bestFriend: Friend
+}
+
+`
+
+const store = init()
+
+store.registerSchema(queryString)
+
+console.log(store.scaffoldSchema('Person'))
+
+/*
+{
+  name: '',
+  friends: [],
+  bestFriend: {
+    name: null,
+    age: null
+  }
+}
+*/
 
 ```
+
+Note: Make sure that schemas that you want to use inside another schema are defined before you use it.
