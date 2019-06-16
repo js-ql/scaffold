@@ -1,5 +1,4 @@
-[![npm version](https://badge.fury.io/js/@js-ql/scaffold.svg)](https://badge.fury.io/js/@js-ql/scaffold)
-# Scaffold
+[![npm version](https://badge.fury.io/js/%40js-ql%2Fscaffold.svg)](https://badge.fury.io/js/%40js-ql%2Fscaffold)# Scaffold
 
 Scaffold is a JavaScript library that is used to generate objects using templates inspired from GraphQL.
 
