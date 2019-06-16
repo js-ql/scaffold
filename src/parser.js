@@ -5,7 +5,7 @@ const { getDefaultValue } = require('./typer')
  * @param {string[]} tokenizedArr 
  * @param {Object} typeMap 
  */
-export const parse = (tokenizedArr, typeMap = {}) => {
+export const parse = (tokenizedArr, typeMap = {}, globalMap = {}) => {
   let obj = {}
   let lastElem = null
   for (let i = 0; i < tokenizedArr.length; ++i) {
@@ -17,10 +17,12 @@ export const parse = (tokenizedArr, typeMap = {}) => {
     else if (elem === '{') {
       const closingLastIndex = findClosingFlowerBracket(i, tokenizedArr)
       let object
-      [object, typeMap] = parse(tokenizedArr.splice(i + 1, closingLastIndex - i), typeMap)
+      [object, typeMap] = parse(tokenizedArr.splice(i + 1, closingLastIndex - i), typeMap, globalMap)
       if (lastElem) {
-        if (!obj[lastElem])
+        if (!obj[lastElem]) {
           obj[lastElem] = object
+          globalMap[lastElem] = object
+        }
       }
       else obj = object
     }
@@ -29,7 +31,7 @@ export const parse = (tokenizedArr, typeMap = {}) => {
       continue
     }
     else {
-      const [key, value] = getDefaultValue(elem)
+      const [key, value] = getDefaultValue(elem, globalMap)
       obj[key] = value
       lastElem = key
     }
