@@ -1,5 +1,6 @@
 webpack.config.js
 index.js
+README.md
 src
 node_modules
-README.md
+assets
