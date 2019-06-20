@@ -7,7 +7,7 @@ const { Store } = require('./src/store')
  * Function that initializes the registry
  * @returns {Object} The registry object
  */
-export const init = () => ({
+const init = () => ({
   /**
    * @type {Object} The list of schemas
    */
@@ -46,3 +46,7 @@ export const init = () => ({
   }
 
 })
+
+module.exports = {
+  init
+}
