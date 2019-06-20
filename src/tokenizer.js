@@ -4,7 +4,7 @@ const { OPENING_CURLY, CLOSING_CURLY, SPACE, EMPTY_STRING, COLON } = require('./
  * @param {string} qlString The query string to tokenize
  * 
  */
-export const tokenize = (qlString) => {
+const tokenize = (qlString) => {
   let key = EMPTY_STRING
   let stack = []
   for (let i = 0; i < qlString.length; ++i) {
@@ -27,4 +27,8 @@ export const tokenize = (qlString) => {
  */
 function isBreakPoint(char) {
   return ((((char === OPENING_CURLY || char === CLOSING_CURLY) || char === SPACE) || char === '\n') || char === EMPTY_STRING)
+}
+
+module.exports = {
+  tokenize
 }

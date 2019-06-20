@@ -1,7 +1,7 @@
 /**
  * The Store for the library, keeps track of schemas and generates scaffolded objects based on the schema name
  */
-export const Store = {
+const Store = {
 
   registry: {},
 
@@ -15,4 +15,8 @@ export const Store = {
   getSchema: function(schemaName) {
     return this.registry[schemaName]
   }
+}
+
+module.exports = {
+  Store
 }

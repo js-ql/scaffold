@@ -3,7 +3,7 @@ const { EMPTY_STRING, EMPTY_ARRAY, EMPTY_OBJECT, COLON, STRING, ARRAY, OBJECT } 
  * This function will return the key and it's default value depending on the type
  * @param {string} key 
  */
-export function getDefaultValue(key, types = null) {
+function getDefaultValue(key, types = null) {
   const column = key.indexOf(COLON)
   if (column < 0) return [key, null]
   return [key.slice(0, column), defaultValueForType(key.slice(column + 1).trim(), types)]
@@ -21,4 +21,8 @@ function defaultValueForType(type, types = null) {
     case OBJECT: return EMPTY_OBJECT
     default: return null
   }
+}
+
+module.exports = {
+  getDefaultValue
 }

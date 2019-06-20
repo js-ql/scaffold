@@ -4,7 +4,8 @@ const { OPENING_CURLY, CLOSING_CURLY } = require('./constants')
  * @param {string} qlString The Query String to check validity for
  * @returns {boolean} True or False, depending on the validity of the query string
  */
-export const isValidQl = (qlString) => {
+const isValidQl = (qlString) => {
+  if(!qlString) return false
   let k = 0
   for (let i = 0; i < qlString.length; i++) {
     if (qlString[i] === OPENING_CURLY)
@@ -15,4 +16,8 @@ export const isValidQl = (qlString) => {
       return false
   }
   return k === 0
+}
+
+module.exports = {
+  isValidQl
 }

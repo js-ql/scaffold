@@ -6,7 +6,7 @@ const { CLOSING_CURLY, DEFINE, OPENING_CURLY } = require('./constants')
  * @param {string[]} tokenizedArr 
  * @param {Object} typeMap 
  */
-export const parse = (tokenizedArr, typeMap = {}, globalMap = {}) => {
+const parse = (tokenizedArr, typeMap = {}, globalMap = {}) => {
   let obj = {}
   let lastElem = null
   for (let i = 0; i < tokenizedArr.length; ++i) {
@@ -51,4 +51,8 @@ function findClosingFlowerBracket(currentIndex, tokenizedArr) {
       return i
     }
   }
+}
+
+module.exports = {
+  parse
 }
