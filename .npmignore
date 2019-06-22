@@ -1,7 +1,8 @@
-webpack.config.js
-index.js
-README.md
-src
-node_modules
 assets
+node_modules
+spec
+src
 tests
+.gitignore
+index.js
+webpack.config.js
