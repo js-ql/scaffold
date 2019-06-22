@@ -4,6 +4,7 @@ const { EMPTY_STRING, EMPTY_ARRAY, EMPTY_OBJECT, COLON, STRING, ARRAY, OBJECT } 
  * @param {string} key 
  */
 function getDefaultValue(key, types = null) {
+  if (typeof key !== 'string' || !key) throw new Error('Invalid key type, key must be a non empty string')
   const column = key.indexOf(COLON)
   if (column < 0) return [key, null]
   return [key.slice(0, column), defaultValueForType(key.slice(column + 1).trim(), types)]

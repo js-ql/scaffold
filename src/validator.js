@@ -1,4 +1,4 @@
-const { OPENING_CURLY, CLOSING_CURLY, NEWLINE, SPACE, EMPTY_STRING } = require('./constants')
+const { OPENING_CURLY, CLOSING_CURLY, NEWLINE, SPACE } = require('./constants')
 /**
  * Determines if the query string is valid
  * @param {string} qlString The Query String to check validity for
