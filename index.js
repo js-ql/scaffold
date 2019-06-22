@@ -56,6 +56,7 @@ const registry = {
     const [parsed, typeMap] = parse(tokenizedArr)
     const schema = Object.keys(typeMap).reduce((a, key) => ({ ...a, [key]: parsed[key] }), {})
     setSchema(schema, this.store)
+    localStorage.setItem(localStorage.getItem('schemaKey'), JSON.stringify(this.store))
   }
 
 }
