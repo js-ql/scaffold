@@ -3,20 +3,21 @@
  */
 const Store = {
 
-  registry: {},
+  registry: {}
 
-  register: function(schemas) {
-    const schemaNames = Object.keys(schemas)
-    for(let schemaName of schemaNames){
-      if(!this.registry[schemaName]) this.registry[schemaName] = schemas[schemaName]
-    }
-  },
+}
 
-  getSchema: function(schemaName) {
-    return this.registry[schemaName]
+const setSchema = function(schemas, store) {
+  const schemaNames = Object.keys(schemas)
+  for(let schemaName of schemaNames){
+    if(!store.registry[schemaName]) store.registry[schemaName] = schemas[schemaName]
   }
 }
 
+const getSchema = function(schemaName, store) {
+  return store.registry[schemaName]
+}
+
 module.exports = {
-  Store
+  Store, setSchema, getSchema
 }
