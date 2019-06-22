@@ -23,17 +23,6 @@ const init = () => ({
   },
 
   /**
-   * Returns a scaffolded object based on the query string
-   * @param {string} qlString The query string to scaffold
-   * @returns {Object} The scaffolded object
-   */
-  scaffold: function (qlString) {
-    if (!isValidQl(qlString)) throw new Error('Invalid QL String')
-    const [parsed] = parse(tokenize(qlString))
-    return parsed
-  },
-
-  /**
    * Used to register schemas in the registry
    * @param {qlString} qlString 
    */
@@ -47,6 +36,18 @@ const init = () => ({
 
 })
 
+/**
+ * Returns a scaffolded object based on the query string
+ * @param {string} qlString The query string to scaffold
+ * @returns {Object} The scaffolded object
+ */
+const scaffold = function (qlString) {
+  if (!isValidQl(qlString)) throw new Error('Invalid QL String')
+  const [parsed] = parse(tokenize(qlString))
+  return parsed
+}
+
+
 module.exports = {
-  init
+  init, scaffold
 }
