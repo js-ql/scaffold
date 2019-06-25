@@ -1,39 +1,14 @@
 const { parse } = require('./src/parser')
 const { tokenize } = require('./src/tokenizer')
 const { isValidQl } = require('./src/validator')
-const { Store, setSchema, getSchema } = require('./src/store')
+const { getStore, setSchema, getSchema } = require('./src/store')
 
 /**
- * Function that initializes the registry
+ * Function that returns the registry
  * @returns {Object} The registry object
  */
 
-/**
- * @type {Object} The list of schemas
- */
-const getStore = function () {
-
-  const isBrowser = new Function("try { return this===window }catch(e){ return false }")
-
-  if (isBrowser()) {
-    if (!localStorage.getItem('schemaKey')) {
-      localStorage.setItem('schemaKey', Math.random().toString())
-    }
-
-    let storeKey = localStorage.getItem('schemaKey')
-
-    if (!localStorage.getItem(storeKey)) {
-      localStorage.setItem(storeKey, JSON.stringify(Store))
-    }
-    return JSON.parse(localStorage.getItem(storeKey))
-  }
-
-  else return Store
-
-}
-
-
-const registry = {
+const Registry = {
 
   store: getStore(),
 
@@ -56,7 +31,6 @@ const registry = {
     const [parsed, typeMap] = parse(tokenizedArr)
     const schema = Object.keys(typeMap).reduce((a, key) => ({ ...a, [key]: parsed[key] }), {})
     setSchema(schema, this.store)
-    localStorage.setItem(localStorage.getItem('schemaKey'), JSON.stringify(this.store))
   }
 
 }
@@ -74,5 +48,5 @@ const scaffold = function (qlString) {
 
 
 module.exports = {
-  registry, scaffold
+  Registry, scaffold
 }
