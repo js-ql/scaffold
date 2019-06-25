@@ -15,7 +15,7 @@ npm install --save @js-ql/scaffold
 ### Simple Usage
 
 ```javascript
-const { init } = require('@js-ql/scaffold')
+const { scaffold } = require('@js-ql/scaffold')
 
 const queryString = `
 {
@@ -23,9 +23,7 @@ const queryString = `
   age
 }`
 
-const store = init()
-
-console.log(store.scaffold(queryString))
+console.log(scaffold(queryString))
 
 /*
 {
@@ -41,7 +39,7 @@ console.log(store.scaffold(queryString))
 ### With Types
 
 ```javascript
-const { init } = require('@js-ql/scaffold')
+const { scaffold } = require('@js-ql/scaffold')
 
 const queryString = `
 {
@@ -50,9 +48,8 @@ const queryString = `
 }
 `
 
-const store = init()
 
-console.log(store.scaffold(queryString))
+console.log(scaffold(queryString))
 /*
 {
   name: '',
@@ -65,7 +62,7 @@ console.log(store.scaffold(queryString))
 ### By Defining Schemas
 
 ```javascript
-const { init } = require('@js-ql/scaffold')
+const { Registry } = require('@js-ql/scaffold')
 
 const queryString = `
 define Person {
@@ -73,12 +70,17 @@ define Person {
   friends: Array
 }
 `
+// Initial Registration
 
-const store = init()
+Registry.register(queryString)
 
-store.registerSchema(queryString)
+.
+.
+.
 
-console.log(store.scaffoldSchema('Person'))
+// When you need it
+
+console.log(Registry.scaffold('Person'))
 
 /*
 {
@@ -92,26 +94,27 @@ console.log(store.scaffoldSchema('Person'))
 ### Multiple Schemas
 
 ```javascript
-const { init } = require('@js-ql/scaffold')
+const { Registry } = require('@js-ql/scaffold')
 
 const queryString = `
-define Friend {
-  name
-  age
-}
-define Person {
-  name: String
-  friends: Array
-  bestFriend: Friend
-}
+  define Friend {
+    name
+    age
+  }
+  define Person {
+    name: String
+    friends: Array
+    bestFriend: Friend
+  }`
 
-`
 
-const store = init()
+Registry.register(queryString)
 
-store.registerSchema(queryString)
+.
+.
+.
 
-console.log(store.scaffoldSchema('Person'))
+console.log(Registry.scaffold('Person'))
 
 /*
 {
