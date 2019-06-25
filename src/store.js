@@ -37,7 +37,7 @@ const getStore = function () {
 const setSchema = function (schemas, store) {
   const schemaNames = Object.keys(schemas)
   for (let schemaName of schemaNames) {
-    if (!store.registry[schemaName]) store.registry[schemaName] = schemas[schemaName]
+    store.registry[schemaName] = schemas[schemaName]
     if (isBrowser()) localStorage.setItem(localStorage.getItem('schemaKey'), JSON.stringify(store))
   }
 }
